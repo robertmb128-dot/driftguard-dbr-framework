@@ -4,13 +4,14 @@ controls:
     category: Monitoring
     description: "All databases must have audit logging enabled for security-relevant events."
     severity: High
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
     impact: "Lack of audit logging reduces visibility into unauthorized actions."
     baseline_reference: v1.0
-    version: 1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Enable and configure audit logging for all sensitive operations."
-    last_reviewed: 2026-02-24
     audit_notes: "Initial baseline control."
 
   - id: MON-002
@@ -18,11 +19,12 @@ controls:
     category: Monitoring
     description: "Alerts must be configured for critical security and availability events."
     severity: High
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
     impact: "Missed critical events can lead to data loss or breaches."
     baseline_reference: v1.0
-    version: 1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Set up alerting for errors, failures, and unauthorized access attempts."
-    last_reviewed: 2026-02-24
     audit_notes: "Initial baseline control."
