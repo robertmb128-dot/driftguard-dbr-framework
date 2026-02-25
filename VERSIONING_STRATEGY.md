@@ -2,8 +2,8 @@
 
 ## Purpose
 
-This document defines the **versioning methodology** for controls and baselines within the DriftGuard-DBR Framework.  
-Versioning ensures **auditable integrity**, traceability of changes, and reproducible compliance scoring.
+Defines the versioning methodology for controls and baselines within the DriftGuard-DBR Framework.  
+Ensures **auditable integrity**, traceability of changes, and reproducible compliance scoring.
 
 ---
 
@@ -11,15 +11,15 @@ Versioning ensures **auditable integrity**, traceability of changes, and reprodu
 
 ### 1. Control Version
 - Each control has its own `version` attribute.
-- Follows semantic versioning: `MAJOR.MINOR.PATCH`
-  - **MAJOR**: Incompatible changes to control definition or scope
-  - **MINOR**: Additions or clarifications that do not change enforcement
-  - **PATCH**: Typo fixes, documentation, or minor adjustments
+- Semantic versioning: `MAJOR.MINOR.PATCH`
+  - **MAJOR**: Incompatible changes to control definition or scope  
+  - **MINOR**: Additions or clarifications that do not change enforcement  
+  - **PATCH**: Typo fixes, documentation, or minor adjustments  
 - Example: `AC-001 version 1.0` → minor update → `1.1`  
 
 ### 2. Baseline Version
 - Baselines reference **specific control versions**.
-- Follows `vX.Y` format (X = major baseline, Y = minor update)
+- Format: `vX.Y` (X = major baseline, Y = minor update)
 - Example: `v1.0` baseline references AC-001 v1.0, ENC-001 v1.0  
 
 ### 3. Audit Traceability
@@ -51,5 +51,4 @@ Versioning ensures **auditable integrity**, traceability of changes, and reprodu
 
 ---
 
-**Outcome:** All controls and baselines are versioned, traceable, and auditable.  
-This approach ensures **reliable compliance reporting and governance** across environments.
+**Outcome:** All controls and baselines are versioned, traceable, and auditable.
