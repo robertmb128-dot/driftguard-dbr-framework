@@ -6,7 +6,11 @@ controls:
     severity: Critical
     impact: "Data loss can occur without consistent backups."
     baseline_reference: v1.0
-    version: 1.0
+
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
+    
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Schedule automated daily backups for all critical databases."
