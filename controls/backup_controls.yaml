@@ -1,0 +1,28 @@
+controls:
+  - id: BK-001
+    name: "Daily Automated Backups"
+    category: Backup
+    description: "All production databases must have daily automated backups."
+    severity: Critical
+    impact: "Data loss can occur without consistent backups."
+    baseline_reference: v1.0
+    version: 1.0
+    compliance_score: 0
+    engine_agnostic: true
+    remediation_guidance: "Schedule automated daily backups for all critical databases."
+    last_reviewed: 2026-02-24
+    audit_notes: "Initial baseline control."
+
+  - id: BK-002
+    name: "Test Backup Restore Monthly"
+    category: Backup
+    description: "Monthly test restores must be performed to validate backup integrity and recoverability."
+    severity: High
+    impact: "Unverified backups may fail during disaster recovery."
+    baseline_reference: v1.0
+    version: 1.0
+    compliance_score: 0
+    engine_agnostic: true
+    remediation_guidance: "Perform test restores for all backup sets monthly."
+    last_reviewed: 2026-02-24
+    audit_notes: "Initial baseline control."
