@@ -1,12 +1,55 @@
-# sample_baseline_v1.yaml
-# DriftGuard-DBR v1.0 baseline reference
+# DriftGuard-DBR v1.0 Baseline
+# Engine-agnostic authoritative control references
+# This baseline references all controls in v1.0
 
 baseline_version: v1.0
+date_created: 2026-02-24
+description: "Initial authoritative v1.0 baseline for engine-agnostic database reliability and security controls."
 controls:
+  # Access Controls
   - id: AC-001
-    name: "Example Access Control"
+    name: "Enforce Strong Passwords"
     category: Access
-    description: "Placeholder control for initial baseline"
-    severity: Medium
-    compliance_score: 0
-    engine_agnostic: true
+  - id: AC-002
+    name: "Limit Privileged Users"
+    category: Access
+
+  # Encryption Controls
+  - id: ENC-001
+    name: "Encrypt Data at Rest"
+    category: Encryption
+  - id: ENC-002
+    name: "Encrypt Data in Transit"
+    category: Encryption
+
+  # Backup & Recovery Controls
+  - id: BK-001
+    name: "Daily Automated Backups"
+    category: Backup
+  - id: BK-002
+    name: "Test Backup Restore Monthly"
+    category: Backup
+
+  # Configuration Controls
+  - id: CFG-001
+    name: "Disable Unused Features"
+    category: Configuration
+  - id: CFG-002
+    name: "Enforce Connection Limits"
+    category: Configuration
+
+  # Monitoring Controls
+  - id: MON-001
+    name: "Enable Audit Logging"
+    category: Monitoring
+  - id: MON-002
+    name: "Configure Alerts for Critical Events"
+    category: Monitoring
+
+  # Operational Recovery Controls
+  - id: REC-001
+    name: "Failover Readiness"
+    category: Recovery
+  - id: REC-002
+    name: "Document Disaster Recovery Plan"
+    category: Recovery
