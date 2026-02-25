@@ -4,13 +4,14 @@ controls:
     category: Encryption
     description: "All sensitive data must be encrypted at rest using FIPS 140-2 compliant algorithms."
     severity: Critical
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
     impact: "Unencrypted data increases risk of exposure in case of breach."
     baseline_reference: v1.0
-    version: 1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Enable database encryption using supported algorithms."
-    last_reviewed: 2026-02-24
     audit_notes: "Initial baseline control."
 
   - id: ENC-002
@@ -18,11 +19,12 @@ controls:
     category: Encryption
     description: "All client-server database connections must use TLS 1.2 or higher."
     severity: High
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
     impact: "Unencrypted connections are susceptible to interception and man-in-the-middle attacks."
     baseline_reference: v1.0
-    version: 1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Enforce TLS for all connections."
-    last_reviewed: 2026-02-24
     audit_notes: "Initial baseline control."
