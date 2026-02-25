@@ -4,9 +4,13 @@ controls:
     category: Configuration
     description: "Database features and extensions not in use must be disabled to reduce attack surface."
     severity: Medium
+    
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
+    
     impact: "Unused features increase risk if exploited."
     baseline_reference: v1.0
-    version: 1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Review enabled features and disable unused modules."
