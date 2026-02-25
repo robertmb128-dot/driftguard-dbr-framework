@@ -1,0 +1,28 @@
+controls:
+  - id: REC-001
+    name: "Failover Readiness"
+    category: Recovery
+    description: "Databases must have configured failover mechanisms for high availability."
+    severity: Critical
+    impact: "System outages can occur without failover mechanisms."
+    baseline_reference: v1.0
+    version: 1.0
+    compliance_score: 0
+    engine_agnostic: true
+    remediation_guidance: "Ensure failover configurations are implemented and tested."
+    last_reviewed: 2026-02-24
+    audit_notes: "Initial baseline control."
+
+  - id: REC-002
+    name: "Document Disaster Recovery Plan"
+    category: Recovery
+    description: "A documented disaster recovery plan must exist and be accessible to operations teams."
+    severity: High
+    impact: "Uncoordinated recovery increases downtime and risk of data loss."
+    baseline_reference: v1.0
+    version: 1.0
+    compliance_score: 0
+    engine_agnostic: true
+    remediation_guidance: "Develop, maintain, and test a disaster recovery plan."
+    last_reviewed: 2026-02-24
+    audit_notes: "Initial baseline control."
