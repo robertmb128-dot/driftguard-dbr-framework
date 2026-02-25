@@ -13,6 +13,10 @@
     "version",
     "status",
     "remediation_guidance"
+    "lifecycle_state",
+    "review_frequency_days",
+    "created_date",
+    "last_reviewed"
   ],
   "properties": {
     "id": {
