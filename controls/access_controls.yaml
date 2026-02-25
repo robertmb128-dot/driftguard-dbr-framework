@@ -1,4 +1,28 @@
-# DriftGuard-DBR v1.0
-# Authoritative access control definitions
+controls:
+  - id: AC-001
+    name: "Enforce Strong Passwords"
+    category: Access
+    description: "All database accounts must enforce passwords with at least 12 characters, including upper/lowercase, numbers, and symbols."
+    severity: High
+    impact: "Weak passwords increase risk of unauthorized access."
+    baseline_reference: v1.0
+    version: 1.0
+    compliance_score: 0
+    engine_agnostic: true
+    remediation_guidance: "Update password policy on all accounts and enforce complexity rules."
+    last_reviewed: 2026-02-24
+    audit_notes: "Initial baseline control."
 
-controls: []
+  - id: AC-002
+    name: "Limit Privileged Users"
+    category: Access
+    description: "Privileged accounts should be limited to a minimum necessary set for operations."
+    severity: Critical
+    impact: "Excess privileged users increase attack surface and risk of data compromise."
+    baseline_reference: v1.0
+    version: 1.0
+    compliance_score: 0
+    engine_agnostic: true
+    remediation_guidance: "Review all privileged accounts and remove unnecessary privileges."
+    last_reviewed: 2026-02-24
+    audit_notes: "Initial baseline control."
