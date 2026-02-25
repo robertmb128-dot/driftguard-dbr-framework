@@ -4,17 +4,14 @@ controls:
     category: Configuration
     description: "Database features and extensions not in use must be disabled to reduce attack surface."
     severity: Medium
-    
     version: 1.0.0
     status: Approved
     last_reviewed: 2026-02-25
-    
     impact: "Unused features increase risk if exploited."
     baseline_reference: v1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Review enabled features and disable unused modules."
-    last_reviewed: 2026-02-24
     audit_notes: "Initial baseline control."
 
   - id: CFG-002
@@ -22,11 +19,12 @@ controls:
     category: Configuration
     description: "Maximum concurrent connections must be enforced to prevent resource exhaustion."
     severity: Medium
+    version: 1.0.0
+    status: Approved
+    last_reviewed: 2026-02-25
     impact: "Excessive connections can degrade performance and availability."
     baseline_reference: v1.0
-    version: 1.0
     compliance_score: 0
     engine_agnostic: true
     remediation_guidance: "Configure connection limits according to workload."
-    last_reviewed: 2026-02-24
     audit_notes: "Initial baseline control."
