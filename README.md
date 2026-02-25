@@ -2,10 +2,12 @@
 
 ## Project Intent
 
-This project establishes a standardized, engine-agnostic Database Reliability and Security Control Framework.
+DriftGuard-DBR Framework is an enterprise-grade, engine-agnostic Database Reliability and Security Control Framework.  
+
+It establishes authoritative baseline controls, versioned policy enforcement, measurable compliance scoring, and controlled remediation workflows for database environments.
 
 ### Purpose
-- Define authoritative baseline controls for database environments
+- Define authoritative baseline controls
 - Detect configuration drift against versioned policy baselines
 - Classify risk severity and operational impact
 - Provide measurable compliance scoring
