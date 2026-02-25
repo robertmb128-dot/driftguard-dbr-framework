@@ -20,6 +20,22 @@
       "pattern": "^[A-Z]{2,5}-[0-9]{3}$",
       "description": "Unique control identifier (e.g., AC-001)"
     },
+    "lifecycle_state": {
+    "type": "string",
+    "enum": ["Draft", "Approved", "Deprecated", "Retired"]
+    },
+    "review_frequency_days": {
+    "type": "integer",
+    "minimum": 30
+    },
+    "created_date": {
+    "type": "string",
+    "format": "date"
+    },
+    "last_reviewed": {
+    "type": "string",
+    "format": "date"
+    },
     "name": {
       "type": "string"
     },
