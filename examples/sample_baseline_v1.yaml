@@ -1,0 +1,12 @@
+# sample_baseline_v1.yaml
+# DriftGuard-DBR v1.0 baseline reference
+
+baseline_version: v1.0
+controls:
+  - id: AC-001
+    name: "Example Access Control"
+    category: Access
+    description: "Placeholder control for initial baseline"
+    severity: Medium
+    compliance_score: 0
+    engine_agnostic: true
