@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DriftGuard-DBR Control Schema",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "category",
+    "description",
+    "engine_agnostic",
+    "severity",
+    "baseline_reference",
+    "version",
+    "status",
+    "remediation_guidance"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[0-9]{3}$",
+      "description": "Unique control identifier (e.g., AC-001)"
+    },
+    "name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Access",
+        "Encryption",
+        "Backup",
+        "Configuration",
+        "Monitoring",
+        "Recovery"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "engine_agnostic": {
+      "type": "boolean"
+    },
+    "adapter_specific": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["Critical", "High", "Medium", "Low"]
+    },
+    "impact": {
+      "type": "string"
+    },
+    "baseline_reference": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Approved", "Deprecated", "Retired"]
+    },
+    "compliance_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "remediation_guidance": {
+      "type": "string"
+    },
+    "audit_notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
