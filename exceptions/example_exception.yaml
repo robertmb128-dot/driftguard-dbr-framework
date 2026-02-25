@@ -1,1 +1,12 @@
-
+exception_id: EX-0001
+control_id: CFG-002
+environment: production
+justification: >
+  Legacy application requires higher connection limits
+  until Q3 migration is complete.
+compensating_controls: >
+  Enhanced monitoring and alerting enabled.
+approved_by: Architecture Review Board
+approval_date: 2026-02-25
+expiration_date: 2026-09-30
+status: Active
