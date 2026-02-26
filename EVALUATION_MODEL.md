@@ -28,71 +28,18 @@ Adapters are responsible for determining compliance state.
 
 ## 3. Risk Weight Model
 
-Risk Weighting Model
+Each control defines an explicit risk_weight.
 
-Each control has a risk weight:
+Default guidance:
 
-Severity	Default Weight
+Severity	Suggested Default
 Low	0.5
 Medium	1.0
 High	2.0
 Critical	3.0
 
-Final compliance score is:
-
-Framework Score
-=
-∑
-(
-𝐶
-𝑜
-𝑚
-𝑝
-𝑙
-𝑖
-𝑎
-𝑛
-𝑐
-𝑒
-𝑉
-𝑎
-𝑙
-𝑢
-𝑒
-×
-𝑅
-𝑖
-𝑠
-𝑘
-𝑊
-𝑒
-𝑖
-𝑔
-ℎ
-𝑡
-)
-∑
-(
-𝑅
-𝑖
-𝑠
-𝑘
-𝑊
-𝑒
-𝑖
-𝑔
-ℎ
-𝑡
-)
-Framework Score=
-∑(RiskWeight)
-∑(ComplianceValue×RiskWeight)
-	​
-
-
-Where:
-
-ComplianceValue ∈ {0, 1}
+Severity is descriptive.
+risk_weight is authoritative for scoring.
 
 ---
 
@@ -100,13 +47,21 @@ ComplianceValue ∈ {0, 1}
 
 For each control:
 
+Weighted Score = ComplianceValue × RiskWeight
+
+Where:
+
+ComplianceValue ∈ {0.0, 0.5, 1.0}
 
 Example:
 
-Critical control (weight=5)
-- Fully compliant → 5 × 1.0 = 5
-- Partially compliant → 5 × 0.5 = 2.5
-- Non-compliant → 5 × 0 = 0
+Critical control (weight = 3.0)
+
+Fully compliant → 3.0 × 1.0 = 3.0
+
+Partially compliant → 3.0 × 0.5 = 1.5
+
+Non-compliant → 3.0 × 0.0 = 0
 
 ---
 
@@ -114,10 +69,13 @@ Critical control (weight=5)
 
 Let:
 
-- W = Sum of all severity weights in baseline
-- S = Sum of all weighted control scores
+W = Sum of all risk weights in the baseline
+
+S = Sum of all weighted control scores
 
 Then:
+
+Framework Score = S / W
 
 ---
 
