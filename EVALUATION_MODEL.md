@@ -108,3 +108,76 @@ Given:
 - Compliance results
 
 The composite score must always produce the same output.
+
+## 11. Risk Weight Model
+
+Risk Weighting Model
+
+Each control has a risk weight:
+
+Severity	Default Weight
+Low	0.5
+Medium	1.0
+High	2.0
+Critical	3.0
+
+Final compliance score is:
+
+Framework Score
+=
+∑
+(
+𝐶
+𝑜
+𝑚
+𝑝
+𝑙
+𝑖
+𝑎
+𝑛
+𝑐
+𝑒
+𝑉
+𝑎
+𝑙
+𝑢
+𝑒
+×
+𝑅
+𝑖
+𝑠
+𝑘
+𝑊
+𝑒
+𝑖
+𝑔
+ℎ
+𝑡
+)
+∑
+(
+𝑅
+𝑖
+𝑠
+𝑘
+𝑊
+𝑒
+𝑖
+𝑔
+ℎ
+𝑡
+)
+Framework Score=
+∑(RiskWeight)
+∑(ComplianceValue×RiskWeight)
+	​
+
+
+Where:
+
+ComplianceValue ∈ {0, 1}
+
+Exception Logic:
+
+If Active + Not Expired → ComplianceValue = 1
+If Expired → ComplianceValue = 0
