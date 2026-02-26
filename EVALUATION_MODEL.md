@@ -26,20 +26,7 @@ Adapters are responsible for determining compliance state.
 
 ---
 
-## 3. Severity Weights
-
-Each control contributes weight based on severity:
-
-| Severity  | Weight |
-|-----------|--------|
-| Critical  | 5      |
-| High      | 3      |
-| Medium    | 2      |
-| Low       | 1      |
-
----
-
-## 4. Weighted Control Score
+## 3. Weighted Control Score
 
 For each control:
 
@@ -53,7 +40,7 @@ Critical control (weight=5)
 
 ---
 
-## 5. Composite Environment Score
+## 4. Composite Environment Score
 
 Let:
 
@@ -64,14 +51,14 @@ Then:
 
 ---
 
-## 6. Rounding Standard
+## 5. Rounding Standard
 
 - Scores are rounded to 2 decimal places.
 - Risk classification uses rounded value.
 
 ---
 
-## 7. Missing Control Handling
+## 6. Missing Control Handling
 
 If a control cannot be evaluated:
 - It is treated as Non-Compliant (0.0)
@@ -79,7 +66,7 @@ If a control cannot be evaluated:
 
 ---
 
-## 8. Exception Handling
+## 7. Exception Handling
 
 If a control has an approved exception:
 - It contributes full weight (1.0)
@@ -88,7 +75,7 @@ If a control has an approved exception:
 
 ---
 
-## 9. Risk Classification
+## 8. Risk Classification
 
 | Composite Score | Risk Level     |
 |-----------------|---------------|
@@ -100,7 +87,7 @@ If a control has an approved exception:
 
 ---
 
-## 10. Deterministic Guarantee
+## 9. Deterministic Guarantee
 
 Given:
 - A baseline version
@@ -109,7 +96,7 @@ Given:
 
 The composite score must always produce the same output.
 
-## 11. Risk Weight Model
+## 10. Risk Weight Model
 
 Risk Weighting Model
 
