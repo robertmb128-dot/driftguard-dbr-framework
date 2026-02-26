@@ -1,0 +1,13 @@
+controls:
+  - id: AC-001
+    risk_weight: 3.0
+    status: Active
+  - id: AC-002
+    risk_weight: 2.0
+    status: Active
+  - id: CFG-001
+    risk_weight: 1.0
+    status: Active
+  - id: CFG-002
+    risk_weight: 1.0
+    status: Active
