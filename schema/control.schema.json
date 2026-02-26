@@ -68,6 +68,7 @@
     "category",
     "description",
     "severity",
+    "risk_weight"
     "version",
     "lifecycle_state",
     "review_frequency_days",
