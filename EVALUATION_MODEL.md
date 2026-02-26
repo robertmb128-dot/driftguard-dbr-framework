@@ -51,9 +51,7 @@ Where:
 
 ComplianceValue ∈ {0.0, 0.5, 1.0}
 
-Example:
-
-Critical control (weight = 3.0)
+Example (Critical control, weight = 3.0):
 
 Fully compliant → 3.0 × 1.0 = 3.0
 
@@ -125,15 +123,13 @@ Documented justification
 Explicit expiration date
 
 ## 9. Risk Classification
-
 Composite Score	Risk Level
 90–100%	Excellent
 75–89%	Good
 50–74%	Moderate
 25–49%	High Risk
 0–24%	Critical Risk
-
-## 10. Deterministic Guarantee
+10. Deterministic Guarantee
 
 Given:
 
