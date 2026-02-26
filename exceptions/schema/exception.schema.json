@@ -2,6 +2,52 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "DriftGuard-DBR Exception Schema",
   "type": "object",
+
+  "properties": {
+
+    "exception_id": {
+      "type": "string",
+      "pattern": "^EX-[0-9]{4}$"
+    },
+
+    "control_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[0-9]{3}$"
+    },
+
+    "environment": {
+      "type": "string"
+    },
+
+    "justification": {
+      "type": "string"
+    },
+
+    "compensating_controls": {
+      "type": "string"
+    },
+
+    "approved_by": {
+      "type": "string"
+    },
+
+    "approval_date": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "expiration_date": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "status": {
+      "type": "string",
+      "enum": ["Active", "Expired", "Revoked"]
+    }
+
+  },
+
   "required": [
     "exception_id",
     "control_id",
@@ -12,39 +58,6 @@
     "expiration_date",
     "status"
   ],
-  "properties": {
-    "exception_id": {
-      "type": "string",
-      "pattern": "^EX-[0-9]{4}$"
-    },
-    "control_id": {
-      "type": "string",
-      "pattern": "^[A-Z]{2,5}-[0-9]{3}$"
-    },
-    "environment": {
-      "type": "string"
-    },
-    "justification": {
-      "type": "string"
-    },
-    "compensating_controls": {
-      "type": "string"
-    },
-    "approved_by": {
-      "type": "string"
-    },
-    "approval_date": {
-      "type": "string",
-      "format": "date"
-    },
-    "expiration_date": {
-      "type": "string",
-      "format": "date"
-    },
-    "status": {
-      "type": "string",
-      "enum": ["Active", "Expired", "Revoked"]
-    }
-  },
+
   "additionalProperties": false
 }
