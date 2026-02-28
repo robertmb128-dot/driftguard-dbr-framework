@@ -2,6 +2,13 @@ import os
 import yaml
 from datetime import datetime
 
+# Terminal color codes for Windows (works in most modern terminals)
+class Colors:
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    RED = "\033[91m"
+    RESET = "\033[0m"
+
 # -------------------------------
 # CONFIGURATION
 # -------------------------------
@@ -44,51 +51,79 @@ def load_exceptions():
 # -------------------------------
 def get_compliance_value(control, exceptions):
     ctrl_id = control["id"]
-    # Use exception if present
     ex = exceptions.get(ctrl_id)
     if ex:
         if ex["status"] == "Active" and datetime.strptime(ex["expiration_date"], "%Y-%m-%d") >= datetime.today():
-            return 1.0
+            return 1.0, True  # Active exception
         else:
-            return 0.0
-    # Default compliance_value from control
-    return control.get("compliance_value", 0.0)
+            return 0.0, True  # Expired exception
+    return control.get("compliance_value", 0.0), False
 
 def calculate_weighted_score(control, exceptions):
-    compliance_value = get_compliance_value(control, exceptions)
+    compliance_value, exception_applied = get_compliance_value(control, exceptions)
     risk_weight = control.get("risk_weight", 1.0)
     weighted_score = compliance_value * risk_weight
-    return weighted_score, risk_weight
+    return weighted_score, risk_weight, compliance_value, exception_applied
 
 def compute_composite_score(controls):
     exceptions = load_exceptions()
     total_weighted_score = 0.0
     total_risk_weight = 0.0
+    details = []
 
     for control in controls:
-        w_score, r_weight = calculate_weighted_score(control, exceptions)
+        w_score, r_weight, compliance_value, exception_applied = calculate_weighted_score(control, exceptions)
         total_weighted_score += w_score
         total_risk_weight += r_weight
+        details.append({
+            "id": control["id"],
+            "name": control.get("name", ""),
+            "risk_weight": r_weight,
+            "compliance_value": compliance_value,
+            "weighted_score": w_score,
+            "exception_applied": exception_applied
+        })
 
-    # Zero-weight guard condition
     if total_risk_weight == 0:
-        return 0.0, "INVALID_BASELINE"
+        return 0.0, "INVALID_BASELINE", details
 
     framework_score = total_weighted_score / total_risk_weight
-    return round(framework_score, 2), None
+    return round(framework_score, 2), None, details
 
 # -------------------------------
 # MAIN
 # -------------------------------
+def colorize_score(score):
+    if score >= 0.9:
+        return Colors.GREEN
+    elif score >= 0.5:
+        return Colors.YELLOW
+    else:
+        return Colors.RED
+
 def main():
     print("Loading controls...")
     controls = load_controls()
-    print(f"Loaded {len(controls)} controls.")
-    score, error = compute_composite_score(controls)
+    print(f"Loaded {len(controls)} controls.\n")
+
+    score, error, details = compute_composite_score(controls)
+
+    print("Control Scores:")
+    print(f"{'ID':<10} {'Compliance':<10} {'RiskWeight':<10} {'WeightedScore':<13} {'Exception'}")
+    print("-" * 60)
+    for d in details:
+        ex_flag = "Yes" if d["exception_applied"] else "No"
+        color = Colors.GREEN if d["compliance_value"] == 1 else (Colors.YELLOW if d["compliance_value"] == 0.5 else Colors.RED)
+        print(f"{d['id']:<10} {color}{d['compliance_value']:<10}{Colors.RESET} {d['risk_weight']:<10} {d['weighted_score']:<13} {ex_flag}")
+
+    print("\nComposite Framework Score:")
     if error:
-        print(f"Error computing score: {error}")
+        print(f"Error: {error}")
     else:
-        print(f"Composite Framework Score: {score * 100:.2f}%")
+        color = colorize_score(score)
+        print(f"{color}{score * 100:.2f}%{Colors.RESET}")
+
+    input("\nPress ENTER to exit...")  # Keeps window open
 
 if __name__ == "__main__":
     main()
