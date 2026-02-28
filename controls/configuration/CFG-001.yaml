@@ -1,1 +1,15 @@
-
+id: CFG-001
+name: "Disable Unused Features"
+category: Configuration
+description: "Database features and extensions not in use must be disabled."
+risk_weight: 1.0
+severity: Medium
+version: 1.0.0
+status: Active
+lifecycle_state: Approved
+review_frequency_days: 90
+created_date: 2026-02-25
+last_reviewed: 2026-02-25
+remediation_guidance: "Review enabled features and disable unused modules."
+audit_notes: "Baseline control created."
+compliance_value: 1.0
