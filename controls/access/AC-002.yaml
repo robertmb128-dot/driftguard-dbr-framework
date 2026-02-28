@@ -1,1 +1,15 @@
-
+id: AC-002
+name: "Limit Login Attempts"
+category: Access
+description: "Database accounts must lock after a set number of failed login attempts."
+risk_weight: 2.0
+severity: Medium
+version: 1.0.0
+status: Active
+lifecycle_state: Approved
+review_frequency_days: 90
+created_date: 2026-02-25
+last_reviewed: 2026-02-25
+remediation_guidance: "Configure database to lock accounts after repeated failures."
+audit_notes: "Baseline control created."
+compliance_value: 1.0
