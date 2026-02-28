@@ -1,1 +1,15 @@
-
+id: AC-001
+name: "Enforce Strong Passwords"
+category: Access
+description: "All database users must use strong passwords."
+risk_weight: 3.0
+severity: High
+version: 1.0.0
+status: Active
+lifecycle_state: Approved
+review_frequency_days: 90
+created_date: 2026-02-25
+last_reviewed: 2026-02-25
+remediation_guidance: "Ensure password policies enforce minimum complexity."
+audit_notes: "Baseline control created."
+compliance_value: 1.0
