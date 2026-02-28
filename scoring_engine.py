@@ -2,114 +2,93 @@ import os
 import yaml
 from datetime import datetime
 
-# -----------------------------
-# Configuration: Paths
-# -----------------------------
-CONTROLS_DIR = os.path.join("controls")
-BASELINE_FILE = os.path.join("baseline", "v1.0", "baselines.yaml")
-EXCEPTIONS_DIR = os.path.join("exceptions")  # Optional if you handle exceptions
+# -------------------------------
+# CONFIGURATION
+# -------------------------------
+CONTROLS_DIR = "controls"
+BASELINE_FILE = "baseline/v1.0/baselines.yaml"
+EXCEPTIONS_DIR = "exceptions/schema"
 
-# -----------------------------
-# Risk Classification
-# -----------------------------
-RISK_LEVELS = [
-    (90, 100, "Excellent"),
-    (75, 89, "Good"),
-    (50, 74, "Moderate"),
-    (25, 49, "High Risk"),
-    (0, 24, "Critical Risk"),
-]
-
-# -----------------------------
-# Load YAML helper
-# -----------------------------
+# -------------------------------
+# HELPERS
+# -------------------------------
 def load_yaml(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-# -----------------------------
-# Load all controls from directories
-# -----------------------------
-def load_controls(controls_dir):
+def load_controls():
     controls = []
-    for category in os.listdir(controls_dir):
-        category_path = os.path.join(controls_dir, category)
+    for category in os.listdir(CONTROLS_DIR):
+        category_path = os.path.join(CONTROLS_DIR, category)
         if os.path.isdir(category_path):
             for file in os.listdir(category_path):
                 if file.endswith(".yaml"):
-                    control = load_yaml(os.path.join(category_path, file))
-                    controls.append(control)
+                    ctrl = load_yaml(os.path.join(category_path, file))
+                    controls.append(ctrl)
     return controls
 
-# -----------------------------
-# Calculate weighted control score
-# -----------------------------
-def calculate_weighted_score(control):
-    # Compliance value: 1.0 = fully compliant, 0.5 = partial, 0.0 = non-compliant
-    compliance_value = control.get("compliance_value", 0.0)
-    
-    # Check exception override
-    if control.get("status") == "Active":
-        expiration_date = control.get("expiration_date")
-        if expiration_date:
-            exp = datetime.strptime(expiration_date, "%Y-%m-%d").date()
-            if exp >= datetime.today().date():
-                compliance_value = 1.0
-            else:
-                compliance_value = 0.0
-    
-    risk_weight = control.get("risk_weight", 1.0)
-    return compliance_value * risk_weight, risk_weight
+def load_baseline():
+    return load_yaml(BASELINE_FILE)["controls"]
 
-# -----------------------------
-# Composite score computation
-# -----------------------------
+def load_exceptions():
+    exceptions = {}
+    if os.path.exists(EXCEPTIONS_DIR):
+        for file in os.listdir(EXCEPTIONS_DIR):
+            if file.endswith(".yaml"):
+                ex = load_yaml(os.path.join(EXCEPTIONS_DIR, file))
+                exceptions[ex["control_id"]] = ex
+    return exceptions
+
+# -------------------------------
+# CALCULATIONS
+# -------------------------------
+def get_compliance_value(control, exceptions):
+    ctrl_id = control["id"]
+    # Use exception if present
+    ex = exceptions.get(ctrl_id)
+    if ex:
+        if ex["status"] == "Active" and datetime.strptime(ex["expiration_date"], "%Y-%m-%d") >= datetime.today():
+            return 1.0
+        else:
+            return 0.0
+    # Default compliance_value from control
+    return control.get("compliance_value", 0.0)
+
+def calculate_weighted_score(control, exceptions):
+    compliance_value = get_compliance_value(control, exceptions)
+    risk_weight = control.get("risk_weight", 1.0)
+    weighted_score = compliance_value * risk_weight
+    return weighted_score, risk_weight
+
 def compute_composite_score(controls):
+    exceptions = load_exceptions()
     total_weighted_score = 0.0
     total_risk_weight = 0.0
-    
+
     for control in controls:
-        w_score, r_weight = calculate_weighted_score(control)
+        w_score, r_weight = calculate_weighted_score(control, exceptions)
         total_weighted_score += w_score
         total_risk_weight += r_weight
 
-    # Guard against zero-weight baseline
+    # Zero-weight guard condition
     if total_risk_weight == 0:
-        raise ValueError("INVALID_BASELINE: Total risk weight is zero")
-    
-    score = total_weighted_score / total_risk_weight
-    return round(score * 100, 2)  # percentage
+        return 0.0, "INVALID_BASELINE"
 
-# -----------------------------
-# Risk classification
-# -----------------------------
-def classify_risk(score):
-    for low, high, level in RISK_LEVELS:
-        if low <= score <= high:
-            return level
-    return "Unknown"
+    framework_score = total_weighted_score / total_risk_weight
+    return round(framework_score, 2), None
 
-# -----------------------------
-# Main Execution
-# -----------------------------
+# -------------------------------
+# MAIN
+# -------------------------------
 def main():
     print("Loading controls...")
-    controls = load_controls(CONTROLS_DIR)
-
-    # Optionally override compliance values from baseline file
-    if os.path.exists(BASELINE_FILE):
-        baseline_data = load_yaml(BASELINE_FILE)
-        baseline_controls = {c["id"]: c for c in baseline_data.get("controls", [])}
-        for control in controls:
-            if control["id"] in baseline_controls:
-                control.update(baseline_controls[control["id"]])
-
-    print(f"Calculating composite score for {len(controls)} controls...")
-    score = compute_composite_score(controls)
-    risk_level = classify_risk(score)
-    
-    print(f"\nComposite Environment Score: {score}%")
-    print(f"Risk Classification: {risk_level}")
+    controls = load_controls()
+    print(f"Loaded {len(controls)} controls.")
+    score, error = compute_composite_score(controls)
+    if error:
+        print(f"Error computing score: {error}")
+    else:
+        print(f"Composite Framework Score: {score * 100:.2f}%")
 
 if __name__ == "__main__":
     main()
